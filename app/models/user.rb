@@ -1,7 +1,12 @@
 class User < ApplicationRecord
-  belongs_to :owner, :performer, :promoter
+  has_one :owner
+  has_one :performer
+  has_one :promoter
+  validates :first_name, presence:true
+  validates :last_name, presence:true
+  validates :email, presence:true
+  validates :phone_number, presence:true
   has_secure_password
 
-  validates :first_name, :last_name, :email, :phone_number, presence:true
-
+  
 end

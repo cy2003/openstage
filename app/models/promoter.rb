@@ -1,9 +1,8 @@
 class Promoter < ApplicationRecord
   has_many :venues
-  has_one :user
+  belongs_to :user
   has_many :time_slots, through: :venues
   has_many :performers, through: :venues
-  
 
 
   # approves performers that request time slots

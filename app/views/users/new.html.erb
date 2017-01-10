@@ -1,0 +1,54 @@
+<h1>Welcome to Open Stage</h1>
+<h2>Please create a user</h2>
+
+<%= form_for(@user) do |f| %>
+  <%= f.label :first_name  %>
+  <br>
+  <%= f.text_field :first_name %>
+
+  <p></p>
+
+  <%= f.label :last_name  %>
+  <br>
+  <%= f.text_field :last_name %>
+
+  <p></p>
+
+
+  <%= f.label :email, "Email: (Email will be your username)" %>
+  <br>
+  <%= f.text_field :email %>
+  <br>
+
+  <p></p>
+
+  <%= f.label :password  %>
+  <br>
+  <%= f.password_field :password %>
+
+  <p></p>
+
+  <%= f.label :phone_number  %>
+  <br>
+  <%= f.text_field :phone_number %>
+
+  <p></p>
+
+    I am a: (check all that apply)<br>
+    <%= f.label :performer %>
+    <%= f.check_box :performer %>
+    <br>
+    <%= f.label :promoter %>
+    <%= f.check_box :promoter %>
+    <br>
+    <%= f.label :owner %>
+    <%= f.check_box :owner %>
+
+  <p></p>
+
+  <%= f.submit %>
+<% end %>
+
+<p></p>
+
+<%= link_to "Return Home", root_path, action: "get", method: "get" %>
