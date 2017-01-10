@@ -10,46 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109204817) do
+ActiveRecord::Schema.define(version: 20170110163057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "owners", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "phone_number"
-    t.string   "email_address"
-    t.boolean  "is_owner",        default: true
-    t.string   "password_digest"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "performers", force: :cascade do |t|
-    t.string   "performer_name"
-    t.string   "first_name_contact"
-    t.string   "last_name_contact"
-    t.integer  "phone_number"
-    t.string   "email_address"
-    t.boolean  "is_performer",       default: true
     t.string   "category"
-    t.string   "password_digest"
     t.string   "genre"
     t.string   "description"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "promoters", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "phone_number"
-    t.string   "email_address"
-    t.boolean  "is_promoter",     default: true
-    t.string   "password_digest"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "time_slots", force: :cascade do |t|
@@ -61,6 +42,19 @@ ActiveRecord::Schema.define(version: 20170109204817) do
     t.string   "status",          default: "Available"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "password_digest"
+    t.string   "email"
+    t.integer  "phone_number"
+    t.integer  "owner_id"
+    t.integer  "performer_id"
+    t.integer  "promoter_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "venues", force: :cascade do |t|
