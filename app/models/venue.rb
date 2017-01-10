@@ -1,5 +1,5 @@
 class Venue < ApplicationRecord
-  belongs_to :promoter
+  belongs_to :promoter, optional: true
   has_many :time_slots
   belongs_to :owner
   has_many :performers, through: :time_slots

@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170110163057) do
   enable_extension "plpgsql"
 
   create_table "owners", force: :cascade do |t|
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -24,11 +25,13 @@ ActiveRecord::Schema.define(version: 20170110163057) do
     t.string   "category"
     t.string   "genre"
     t.string   "description"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "promoters", force: :cascade do |t|
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,10 +52,7 @@ ActiveRecord::Schema.define(version: 20170110163057) do
     t.string   "last_name"
     t.string   "password_digest"
     t.string   "email"
-    t.integer  "phone_number"
-    t.integer  "owner_id"
-    t.integer  "performer_id"
-    t.integer  "promoter_id"
+    t.string   "phone_number"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

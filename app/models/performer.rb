@@ -1,6 +1,6 @@
 class Performer < ApplicationRecord
   has_many :time_slots
-  has_one :user
+  belongs_to :user
   has_many :venues, through: :time_slots
   has_many :promoters, through: :time_slots
 
