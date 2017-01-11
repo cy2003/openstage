@@ -26,16 +26,17 @@ class VenuesController < ApplicationController
 
 	def edit
 		@venue = Venue.find(params[:id])
-
-    if current_user
-      if current_user.owner.venue == venue.owner
-        render :edit
-      end
-    else
-    end
 	end
 
 	def update
+		@venue = Venue.find(params[:id])
+		if @venue.update(venue_params)
+			redirect_to venue_path(@venue)
+		else
+			flash[:notice] = "Update not valid. Try again."
+			render :edit 
+		end
+
 	end
 
 	def show
@@ -43,6 +44,12 @@ class VenuesController < ApplicationController
 	end
 
 	def destroy
+		@venue = Venue.find(params[:id])
+		@venue.destroy
+		@venue.time_slots.destroy
+		flash[:notice] = "Your time slot has been deleted"
+		redirect_to venues_path
+
 	end
 
 

@@ -14,6 +14,14 @@
  *= require_self
  */
 /* @import "bootstrap";
+
+If using bootstrap: Make sure the file has .scss extension (or .sass for Sass syntax). If you have just generated a new Rails app, it may come with a .css file instead. If this file exists, it will be served instead of Sass, so rename it:
+
+$ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss 
+
+
+*/
+
 /* Some Style from the Bootstrap Default Theme */
 /* body {
  * padding-top: 70px;
