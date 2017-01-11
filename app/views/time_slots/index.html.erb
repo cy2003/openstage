@@ -1,1 +1,32 @@
 <h1>Index Page for Time Slots</h1>
+
+
+
+<% Venue.all.each do |venue| %>
+	<h3><%= venue.name %></h3>
+	<% if venue.promoter %>
+		<p>Promoter: <%= venue.promoter.user.first_name %> <%= venue.promoter.user.last_name %></p>
+	<% end %>
+	<% if !venue.time_slots %>
+		Nothing booked for this venue yet.
+	<% else %>
+		<% venue.time_slots.all.each do |time_slot| %>
+			<h3>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h3>
+			<h3>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h3>
+			<h3>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h3>
+			<% if time_slot.performer.user.first_name %>
+				<h2>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h2>
+			<% else %>
+				<h2> No performer scheduled yet.</h2>
+			<% end %>
+			
+		<% end %>
+	<% end %>
+
+
+
+		
+<% end %>
+	
+
+

@@ -1,14 +1,14 @@
 class TimeSlot < ApplicationRecord
   belongs_to :venue
-  belongs_to :performer, optional: :true #change this from belongs_to to has_one?
-  belongs_to :promoter #through: :venues #do we need this? 
+  belongs_to :performer, optional: true #change this from belongs_to to has_one?
+  belongs_to :promoter, optional: true #through: :venues #do we need this? 
 
   validates :start_time, :end_time, presence:true
 
   # validate :promoter?
-  # validate :time_slot_available, if: :filled_times
-  # validate :check_start_time_is_before_end_time, if: :filled_times
-  # validate :date_is_in_future
+  validate :time_slot_available, if: :filled_times
+  validate :check_start_time_is_before_end_time, if: :filled_times
+  validate :date_is_in_future
 
 
 
@@ -22,10 +22,13 @@ class TimeSlot < ApplicationRecord
   # 	end
   # end
   # 
-  # def date_is_in_future
-  # 	date > Date.today
-  # end
-  # 	
+  # 
+  def date_is_in_future
+  	if date < Date.today
+  		errors.add(:date_error, "Time slot must be in the future.")
+  	end
+  end
+  	
 
 
   def filled_times
@@ -34,11 +37,16 @@ class TimeSlot < ApplicationRecord
 
   def time_slot_available
   	available = true
-  	venue.time_slot.each do |time_slot|
-  		if(start_time - time_slot.end_time)*(time_slot.start_time - end_time) >=0
-  			available = false
-  			break
-  		end
+  
+	venue = Venue.find(self.venue_id)	
+  	venue.time_slots.each do |time_slot|
+  		if time_slot.date == date
+	  		if(start_time - time_slot.end_time)*(time_slot.start_time - end_time) >=0
+	  			available = false
+	  			break
+	  		end
+	  	else
+	  	end
   	end
   	if !available
   			errors.add(:availability_error, "Time slot is not available during these times.")
