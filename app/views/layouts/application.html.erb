@@ -13,11 +13,23 @@
 
     <div class="nav-bar" bgcolor="grey">
       <% if logged_in?%>
-        <a class="navbar-brand" href="<%= root_path %>"/>Home</a> | <a class="navbar-brand" href="<%= user_path(current_user) %>"/>Profile</a> | <a class="navbar-brand" href="<%= logout_path %>"/>Log Out</a>
+        <a class="navbar-brand" href="<%= root_path %>"/>Home</a> | <a class="navbar-brand" href="<%= user_path(current_user) %>"/>Profile</a> | <a class="navbar-brand" href="<%= logout_path %>"/>Log Out</a> | <%= current_user.first_name %> | Privileges:
+        <% if current_user.promoter %>
+           Promoter
+          <% end %>
+        <% if current_user.performer %>
+         Performer
+          <% end %>
+        <% if current_user.owner %>
+          Owner
+          <% end %>
 
-      <%else %>
+         
+
+      <% else %>
         <a class="navbar-brand" href="<%= login_path %>"/>Log In</a>
-      <%end%>
+        | <a class="navbar-brand" href="<%= new_user_path %>"/>Sign Up</a>
+      <% end %>
     </div>
 
       <p></p>

@@ -28,21 +28,22 @@ Hi Owner!
 
 
 <% if @user.promoter %>
-    Hi promoter
+    Hi Promoter!!!!
   <% if @user.promoter.venues %>
-    These are your venues:
+    <br>
+    These are your venues: <br>
     <% @user.promoter.venues.each do |venue| %>
-      <%= venue.name %>
+      <h2><%= venue.name %><br></h2>
       <% if venue.time_slots %>
     		<% venue.time_slots.all.each do |time_slot| %>
     		  <% if time_slot.performer.user.first_name %>
-    				<h2>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h2>
+    				<h3>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h3>
     			<% else %>
-    				<h2> No performer scheduled yet.</h2>
+    				<h3> No performer scheduled yet.</h3>
     			<% end %>
-  		    <h3>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h3>
-    			<h3>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h3>
-    			<h3>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h3>
+  		    <p>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></p>
+    			<p>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></p>
+    			<p>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></p>
 
   		<% end %>
       <% end %>
