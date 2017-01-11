@@ -10,8 +10,16 @@
   </head>
 
   <body>
- 
-   
+
+    <div class="nav-bar" bgcolor="grey">
+      <% if logged_in?%>
+        <a class="navbar-brand" href="<%= logout_path %>"/>Log Out</a>
+      <%else %>
+        <a class="navbar-brand" href="<%= login_path %>"/>Log In</a>
+      <%end%>
+    </div>
+
+      <p></p>
     <%= yield %>
   </body>
 </html>

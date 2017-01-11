@@ -10,9 +10,23 @@ class UsersController < ApplicationController
   end
 
   def create
-
     @user = User.new(user_params)
+
     if password_exists && @user.save
+      if params[:user][:owner] == '1'
+
+        @user.owner = Owner.new(user_id: @user.id)
+      end
+
+      if params[:user][:performer] == '1'
+        @user.performer = Performer.new(user_id: @user.id)
+      end
+
+      if params[:user][:promoter] == '1'
+        @user.promoter = Promoter.new(user_id: @user.id)
+      end
+
+      @user.save
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
@@ -22,12 +36,20 @@ class UsersController < ApplicationController
   end
 
   def edit
+
+
   end
 
   def show
+    @user = User.find(params[:id])
+
+    #
+    # if @user.performer
+    #   if !@user.performer
   end
 
   def destroy
+
   end
 
   private
@@ -37,6 +59,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :password, :email, :phone_number, :owner, :performer, :promoter)
+    params.require(:user).permit(:first_name, :last_name, :password, :email, :phone_number)
   end
 end
