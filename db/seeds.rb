@@ -1,45 +1,3 @@
-# OWNERS (no fields)
-
-# PROMOTERS (no fields)
-
-# PERFORMERS
-#   t.string   "category"
-#   t.string   "genre"
-#   t.string   "description"
-
-# USERS
-#   t.string   "first_name"
-#   t.string   "last_name"
-#   t.string   "password_digest"
-#   t.string   "email"
-#   t.integer  "phone_number"
-#   t.integer  "owner_id"
-#   t.integer  "performer_id"
-#   t.integer  "promoter_id"
-
-# TIME SLOTS
-#   t.integer  "venue_id"
-#   t.integer  "performer_id"
-#   t.datetime "start_time"
-#   t.datetime "end_time"
-#   t.string   "age_restriction", default: "All Ages"
-#   t.string   "status",          default: "Available"
-
-# VENUES
-#   t.string   "name"
-#   t.string   "street_address_1"
-#   t.string   "street_address_2"
-#   t.string   "city"
-#   t.string   "state"
-#   t.integer  "zip_code"
-#   t.integer  "promoter_id"
-#   t.integer  "owner_id"
-
-# MUST CREATE USERS FIRST
-
-
-
-
 avi_user = User.create(first_name: "Avi", last_name: "Flombaum", password: "hi", email: "avi@flatironschool.com", phone_number: "8889580569")
 avi_owner = Owner.new
 avi_owner.user = avi_user
@@ -72,11 +30,11 @@ ian_promoter.save
 
 # CREATE VENUES
 flatiron = Venue.new(name: "Flatiron School", street_address_1: "11 Broadyway", street_address_2: "Suite 215", city: "New York", state: "NY", zip_code: 10004)
-flatiron.owner = avi_owner
+avi_owner.venues << flatiron
 flatiron.promoter = val_promoter
 flatiron.save
 
 one_world = Venue.new(name: "One World Trade Center", street_address_1: "1 World Trade Center", street_address_2: "Suite 100", city: "New York", state: "NY", zip_code: 10001)
-one_world.owner = rob_owner
+rob_owner.venues << one_world
 one_world.promoter = ian_promoter
 one_world.save

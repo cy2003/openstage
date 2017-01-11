@@ -27,3 +27,14 @@ $ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.s
  * padding-top: 70px;
   *padding-bottom: 30px;
 }*/
+
+.nav-bar {
+  font-family: "Century Gothic";
+  background-color: #d3d3d3;
+  padding: 10px;
+  color: black;
+}
+
+.nav-bar a {
+  color: black;
+}

@@ -20,8 +20,8 @@ class VenuesController < ApplicationController
 			redirect_to venues_path
 		else
 			flash[:notice] = "The venue you entered is not valid. Please try again."
-      		redirect_to new_venue_path
-      	end
+      redirect_to new_venue_path
+		end
 	end
 
 	def edit
