@@ -1,0 +1,15 @@
+<h1>Show Venue Page</h1>
+<p></p>
+<p></p>
+	<h2><%= @venue.name %> <br></h2>
+	<%= @venue.street_address_1 %><br>
+ 	<%= @venue.street_address_2 %><br>
+ 	<%= @venue.city %> <br>
+ 	<%= @venue.state %> <br>
+ 	<%= @venue.zip_code %> <br>
+	<p></p>
+ 	<p></p>
+ 	<%= link_to "Return To All Venues", venues_path, action: "get", method: "get" %>
+ 	<p></p>
+ 	<p></p>
+ 	<%= link_to "Return Home", root_path, action: "get", method: "get" %>

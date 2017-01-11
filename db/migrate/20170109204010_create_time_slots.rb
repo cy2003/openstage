@@ -3,8 +3,9 @@ class CreateTimeSlots < ActiveRecord::Migration[5.0]
     create_table :time_slots do |t|
       t.integer :venue_id
       t.integer :performer_id
-      t.datetime :start_time
-      t.datetime :end_time
+      t.date :date
+      t.time :start_time
+      t.time :end_time
       t.string :age_restriction, default: "All Ages"
       t.string :status, default: "Available"
 

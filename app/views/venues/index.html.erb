@@ -1,0 +1,27 @@
+<h1> All Venues </h1>
+
+
+<% if  @venues == nil %>
+	<h2> There are currently no available venues. </h2>
+<% else %>
+ <% @venues.each do |venue| %>
+
+ 	<h3><%= link_to "#{venue.name}", venue_path(venue) %> </h3>
+ 	<%= venue.street_address_1 %><br>
+ 	<% if venue.street_address_2 != "" %>
+ 		<%= venue.street_address_2 %><br>
+ 	<% end %>
+ 	<%= venue.city %> <br>
+ 	<%= venue.state %> <br>
+ 	<%= venue.zip_code %> <br>
+ 	Owner name: <%= venue.owner.user.first_name %> <%= venue.owner.user.last_name %><br>
+ 	<p></p>
+ <% end %>
+ <% end %>
+
+<p></p>
+<p></p>
+ <!-- Need to restrict this link to owners -->
+ <%= link_to "Create New Venue", new_venue_path(@venue) %>
+
+

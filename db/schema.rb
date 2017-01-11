@@ -55,8 +55,9 @@ ActiveRecord::Schema.define(version: 20170110163057) do
   create_table "time_slots", force: :cascade do |t|
     t.integer  "venue_id"
     t.integer  "performer_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.date     "date"
+    t.time     "start_time"
+    t.time     "end_time"
     t.string   "age_restriction", default: "All Ages"
     t.string   "status",          default: "Available"
     t.datetime "created_at",                            null: false
