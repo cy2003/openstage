@@ -8,31 +8,34 @@
 <!-- need to insert venue name -->
 <!-- consider changing data table to have date and then start/end times -->
 
+<% if current_user.promoter %>
+  <% if current_user.promoter.id == @venue.promoter.id %>
+    <%= form_for(@time_slot) do |f| %>
 
-<%= form_for(@time_slot) do |f| %>
+      <%= f.label :date  %><br>
+      <%= f.date_field :date %><br>
+      <p></p>
 
-  <%= f.label :date  %><br>
-  <%= f.date_field :date %><br>
-  <p></p>
+      <%= f.label :start_time  %> <br>
+      <%= f.time_field :start_time %>
+      <p></p>
 
-  <%= f.label :start_time  %> <br>
-  <%= f.time_field :start_time %>
-  <p></p>
+      <%= f.label :end_time  %><br>
+      <%= f.time_field :end_time %><br>
+      <p></p>
 
-  <%= f.label :end_time  %><br>
-  <%= f.time_field :end_time %><br>
-  <p></p>
-	
-  <%= f.label :performer_id  %>  <br>
-  <%= f.number_field :performer_id %>
-  <p></p>
+      <%= f.label :performer_id  %>  <br>
+      <%= f.number_field :performer_id %>
+      <p></p>
 
-   <%= f.label :venue_id  %>  <br>
-  <%= f.number_field :venue_id %>
-  <p></p>
+       <%= f.label :venue_id  %>  <br>
+      <%= f.number_field :venue_id %>
+      <p></p>
 
-  <%= f.submit %>
+      <%= f.submit %>
 
+    <% end %>
+  <% end %>
 <% end %>
 
 <p></p>

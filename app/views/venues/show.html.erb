@@ -18,25 +18,33 @@
  	<p></p>
  	<%= link_to "Return Home", root_path, action: "get", method: "get" %>
  	<p></p>
+	<%= link_to "Create New Time Slot", {controller: "time_slots", action: "new", venue: @venue.id} %>
+
 
 	<h2>Shows for <%= @venue.name %></h2>
+
 	<% if @venue.time_slots %>
+
 		<% @venue.time_slots.all.each do |time_slot| %>
+
 		<% if time_slot.performer.user.first_name %>
 				<h2>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h2>
 			<% else %>
 				<h2> No performer scheduled yet.</h2>
 			<% end %>
+
 			<h3>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h3>
+
 			<h3>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h3>
 			<h3>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h3>
-			
-			
-		<% end %> 
+			<br>
+		<% end %>
+		<p></p>
+
 
 		<%= link_to "Click here to delete this venue.", venue_path(@venue), method: :delete, data: {confirm: "Really delete this venue? Deleting this venue will delete associated time slots."} %>
 
-		
+
 	<% end %>
 
 
