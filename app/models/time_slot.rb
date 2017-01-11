@@ -4,6 +4,7 @@ class TimeSlot < ApplicationRecord
   belongs_to :promoter #through: :venues #do we need this? 
 
   validates :start_time, :end_time, presence:true
+
   # validate :promoter?
   # validate :time_slot_available, if: :filled_times
   # validate :check_start_time_is_before_end_time, if: :filled_times
@@ -51,5 +52,16 @@ class TimeSlot < ApplicationRecord
   		errors.add(:time_errors, "Start time must be before end time.")
   	end
   end
+
+
+  # make sure time slot is available
+  # time slot is in the future
+  # time max 4 hours
+  # it should know if it's available, pending, booked.
+  # end time has to be after the start time
+  # confirm that a promoter is creating it.
+  # confirm that performer is requesting it.
+  # create and edit time slots 
+
 
 end

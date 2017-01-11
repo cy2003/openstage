@@ -16,24 +16,40 @@ ActiveRecord::Schema.define(version: 20170110163057) do
   enable_extension "plpgsql"
 
   create_table "owners", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "phone_number"
+    t.string   "email_address"
+    t.boolean  "is_owner",        default: true
+    t.string   "password_digest"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "performers", force: :cascade do |t|
+    t.string   "performer_name"
+    t.string   "first_name_contact"
+    t.string   "last_name_contact"
+    t.integer  "phone_number"
+    t.string   "email_address"
+    t.boolean  "is_performer",       default: true
     t.string   "category"
+    t.string   "password_digest"
     t.string   "genre"
     t.string   "description"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "promoters", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "phone_number"
+    t.string   "email_address"
+    t.boolean  "is_promoter",     default: true
+    t.string   "password_digest"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "time_slots", force: :cascade do |t|
