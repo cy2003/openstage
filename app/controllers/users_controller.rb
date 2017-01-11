@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    binding.pry
     @user = user.new(user_params)
     if password_exists && @user.save
       session[:user_id] = @user.id
