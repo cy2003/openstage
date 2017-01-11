@@ -4,7 +4,7 @@ class TimeSlotsController < ApplicationController
 
 	def index
 		puts "Hello World"
-		#@time_slots = TimeSlot.all 
+		#@time_slots = TimeSlot.all
 	end
 
 	def new
@@ -19,19 +19,18 @@ class TimeSlotsController < ApplicationController
 
 	def create
 		@time_slot = TimeSlot.new(time_slot_params)
-		
+
 		#adding the specified date to the start and end times
 		# @time_slot.start_time = (@time_slot.date.to_s + " " + @time_slot.start_time.strftime("%H:%M:%S")).to_datetime.utc
 		# @time_slot.end_time = (@time_slot.date.to_s + " " + @time_slot.end_time.strftime("%H:%M:%S")).to_datetime.utc
-		binding.pry
 		if @time_slot.save
 			redirect_to time_slot_path(@time_slot)
 		else
 			flash[:notice] = "The time slot you have specified is already on the schedule or is not valid (ie start time is after end time. Please try again)."
       		redirect_to new_time_slot_path
-      	end
+		end
 
-     end
+ 	end
 
 	def edit
 		@time_slot = TimeSlot.find(params[:id])
@@ -43,7 +42,7 @@ class TimeSlotsController < ApplicationController
 			redirect_to time_slot_path(@time_slot)
 		else
 			flash[:notice] = "Update not valid. Try again."
-			render :edit 
+			render :edit
 		end
 
 	end
