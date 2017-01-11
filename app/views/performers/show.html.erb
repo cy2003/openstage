@@ -1,0 +1,21 @@
+<h1>Hi <%= @performer.user.first_name + " " + @performer.user.last_name %></h1>
+
+<p></p>
+
+<b>Phone Number:</b> <%= @performer.user.phone_number %>
+
+<p></p>
+
+<b>Email:</b>  <%= @performer.user.email %>
+
+<p></p>
+
+<b>Genre:</b> <%= @performer.genre %>
+
+<p></p>
+
+<b>Description:</b> <%= @performer.description %>
+
+<p></p>
+
+<%= link_to "Edit Your Info", edit_performer_path %>

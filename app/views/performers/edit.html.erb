@@ -1,0 +1,9 @@
+<h1>edit performer</h1>
+
+<%= form_for @performer do |f| %>
+  <%= f.text_area :description %>
+  <p></p>
+  <%= f.text_field :genre %>
+
+  <%= f.submit %>
+<% end %>
