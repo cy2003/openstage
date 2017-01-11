@@ -5,17 +5,17 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_owner
-    @user = user.find(session[:user_id])
+    @user = User.find(session[:user_id])
     @user.owner
   end
 
   def authenticate_performer
-    @user = user.find(session[:user_id])
+    @user = User.find(session[:user_id])
     @user.performer
   end
 
   def authenticate_promoter
-    @user = user.find(session[:user_id])
+    @user = User.find(session[:user_id])
     @user.promoter
   end
 

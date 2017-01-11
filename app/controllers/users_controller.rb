@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def create
     binding.pry
-    @user = user.new(user_params)
+    @user = User.new(user_params)
     if password_exists && @user.save
       session[:user_id] = @user.id
       redirect_to user_path(@user)
@@ -26,8 +26,7 @@ class UsersController < ApplicationController
   def show
   end
 
-  def create
-  end
+
 
   def destroy
   end
