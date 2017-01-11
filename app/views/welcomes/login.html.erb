@@ -1,11 +1,11 @@
-<b>Please Login:</b>
+<h2>Please Login:</h2>
 
-<%= form_tag('/sessions') do %>
+<h3><%= form_tag('/sessions') do %>
 <%# form_tag({controller: 'sessions', action: 'create', method: 'post'}) %>
-
-  <%= label_tag :email %>
+<p></p>
+ <%= label_tag :email %>
   <%= text_field_tag 'user[email]' %>
-
+<p></p>
   <br>
 
   <%= label_tag :password %>
@@ -15,4 +15,8 @@
 
   <%= submit_tag "Sign In"%>
 
-<% end %>
+<% end %></h3>
+
+<p></p>
+<p></p>
+<%= link_to "Click here to sign up", new_user_path %>

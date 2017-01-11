@@ -38,3 +38,9 @@ $ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.s
 .nav-bar a {
   color: black;
 }
+
+body {
+background-color: lavender; 
+font-family: "Century Gothic";
+margin: 2em;
+}
