@@ -15,6 +15,7 @@ class VenuesController < ApplicationController
 	end
 
 	def create
+		binding.pry
 		@venue = Venue.new(venue_params)
 		if @venue.save
 			redirect_to venues_path
@@ -34,7 +35,7 @@ class VenuesController < ApplicationController
 			redirect_to venue_path(@venue)
 		else
 			flash[:notice] = "Update not valid. Try again."
-			render :edit 
+			render :edit
 		end
 
 	end

@@ -8,36 +8,34 @@
 <!-- need to insert venue name -->
 <!-- consider changing data table to have date and then start/end times -->
 
+<% if current_user.owner %>
+  <%= form_for(@venue) do |f| %>
 
-<%= form_for(@venue) do |f| %>
-
-  <%= f.label :name  %> <br>
-  <%= f.text_field :name %>
-  <p></p>
-  <%= f.label :street_address_1, "Street Address 1"  %> <br>
-  <%= f.text_field :street_address_1 %>
-  <p></p>
-  <%= f.label :street_address_2, "Street Address 2" %> <br>
-  <%= f.text_field :street_address_2 %>
-  <p></p>
-  <%= f.label :city  %> <br>
-  <%= f.text_field :city %>
-  <p></p>
-   <%= f.label :state  %> <br>
-  <%= f.text_field :state %>
-  <p></p>
-  <%= f.label :zip_code, "Zip Code"  %> <br>
-  <%= f.text_field :zip_code %>
-  <p></p> 
-  <%= f.label :owner_id, "Owner ID (this will go away when we know who self is)"%> <br>
-  <%= f.text_field :owner_id%><br>
+    <%= f.label :name  %> <br>
+    <%= f.text_field :name %>
     <p></p>
-  <%= f.label :promoter_id,  "Promoter ID (optional at this point - will eventually have drop down to choose from)"%> <br>
-  <%= f.text_field :promoter_id%><br>
-  
-  <p></p>
+    <%= f.label :street_address_1, "Street Address 1"  %> <br>
+    <%= f.text_field :street_address_1 %>
+    <p></p>
+    <%= f.label :street_address_2, "Street Address 2" %> <br>
+    <%= f.text_field :street_address_2 %>
+    <p></p>
+    <%= f.label :city  %> <br>
+    <%= f.text_field :city %>
+    <p></p>
+     <%= f.label :state  %> <br>
+    <%= f.text_field :state %>
+    <p></p>
+    <%= f.label :zip_code, "Zip Code"  %> <br>
+    <%= f.text_field :zip_code %>
+    <p></p>
+    <%= f.label :promoter_id,  "Promoter ID (optional at this point - will eventually have drop down to choose from)"%> <br>
+    <%= f.text_field :promoter_id%><br>
 
-  <%= f.submit %>
+    <p></p>
+
+    <%= f.button :submit, name: "venue[owner_id]", value: current_user.owner.id %>
+  <% end %>
 <% end %>
 
 <p></p>
