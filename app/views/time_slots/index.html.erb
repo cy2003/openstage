@@ -4,7 +4,7 @@
 
 
 <% Venue.all.each do |venue| %>
-	<h2><%= venue.name %></h2>
+	<h2><%= link_to "#{venue.name}", venue_path(venue) %></h2>
 	<% if venue.promoter %>
 		<h5>Promoter: <%= venue.promoter.user.first_name %> <%= venue.promoter.user.last_name %></h5>
 	<% end %>
@@ -12,12 +12,11 @@
 	<% if venue.time_slots.empty? %>
 		Nothing booked for this venue yet.<br>
 	<% else %>
-		<%  sorted_array = []%>
-		 <%date_sorted_array = venue.time_slots.sort_by {|date_slot| date_slot.date}%>
-		<% time_sorted_array = date_sorted_array.sort_by {|time_slot| time_slot.start_time}%>
+		<%  sorted_array = venue.time_slots.sort_by {|x| [x.date, x.start_time] }%>
+		<!-- this would be a great method to create and then call throughout program -->
 		
 
-		<% time_sorted_array.each do |time_slot| %>
+		<% sorted_array.each do |time_slot| %>
 			<% if time_slot.performer %>
 
 				<h3>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h3>
