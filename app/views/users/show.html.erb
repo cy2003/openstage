@@ -4,7 +4,7 @@
 <p> <%= link_to "Edit your user profile", edit_user_path(@user) %></p>
 
 <p></p>
-  
+
   <p></p>
 
 
@@ -33,6 +33,7 @@
 
 
 <% if @user.promoter %>
+<% binding.pry %>
   <% if @user.promoter.venues %>
     <br>
     <h4>These are your venues: </h4><br>
@@ -42,8 +43,10 @@
       <% if !venue.time_slots.empty? %>
     		<% venue.time_slots.all.each do |time_slot| %>
     		  <% if time_slot.performer %>
-            
+
       				<h4>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h4>
+          <% elsif time_slot.status == "pending" %>
+            <!-- <% #link_to "Click here to review applications", time_slot_path %> -->
       			<% else %>
       				<h3> No performer scheduled yet.</h3>
       			<% end %>
@@ -87,7 +90,7 @@
         <p></p>
         <h3>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h3>
       <%end%>
-      <%= button_to "Request", time_slot_path(time_slot), :method => :put, params: {"time_slot" => {status:  "pending"}} %>
+      <%= button_to "Request", time_slot_applications_path, :method => :post, params: {time_slot_id:  time_slot.id, performer_id: current_user.performer.id, status: "pending"} %>
     <%end%>
 
 

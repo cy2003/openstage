@@ -55,9 +55,17 @@ class TimeSlotsController < ApplicationController
 	end
 
 	def update
-		binding.pry
 		@time_slot = TimeSlot.find(params[:id])
 		if @time_slot.update(time_slot_params)
+			if @time_slot.status == "booked"
+				binding.pry
+				if @time_slot.time_slot_applications.each do |time_slot_application|
+					time_slot_application.status = ""
+				end
+				end
+			end
+
+
 			redirect_to time_slot_path(@time_slot)
 		else
 			flash[:notice] = "Update not valid. Try again."

@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   resources :sessions
   get '/login', to: "welcomes#login", as: "login"
   get '/logout', to: "sessions#destroy", as: 'logout'
+  resources :time_slot_applications
 end
