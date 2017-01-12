@@ -2,6 +2,11 @@
 
 <h1>Welcome back <%= @user.first_name %>!</h1>
 
+<p></p>
+  <%= link_to "Return Home", root_path, action: "get", method: "get" %>
+  <p></p>
+  
+
 <% if @user.owner %>
 Hi Owner!
 <p></p>

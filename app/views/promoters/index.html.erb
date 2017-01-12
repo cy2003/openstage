@@ -1,16 +1,19 @@
 <h1>List of Promoters on OpenStage</h1>
 
 <% @promoters.each do |promoter|%>
-
+=================================================
 	<h2><%= promoter.user.first_name %> <%= promoter.user.last_name %></h2>
 	<% if promoter.venues %>
 		<h3>Venues promoting: </h3>	
 		<% promoter.venues.each do |venue| %>
 			<b><%= link_to "#{venue.name}", venue_path(venue) %></b><br>
 			<% if venue.time_slots %>
+			
 				<% venue.time_slots.each do |time_slot| %>
 					<%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %> on <%= time_slot.date.strftime("%A, %B %e, %Y")%>, <%= time_slot.start_time.strftime("%l:%M %P") %> - <%= time_slot.end_time.strftime("%l:%M %P")%> <br>
 				<% end %>
+			<% else %> %>
+				Currently no scheduled performances at this venue.
 			<% end %>
 		<br>
 		<br>
@@ -18,3 +21,9 @@
 
 <% end %>
 <% end %>
+=================================================
+<p></p>
+<p></p>
+<p></p>
+ 	<%= link_to "Return Home", root_path, action: "get", method: "get" %>
+ 	<p></p>
