@@ -1,5 +1,5 @@
 <h1> All Venues </h1>
-
+<div class="hline"></div>
 
 <% if  @venues == nil %>
 	<h2> There are currently no available venues. </h2>
@@ -15,13 +15,18 @@
  	<%= venue.state %> <br>
  	<%= venue.zip_code %> <br>
  	Owner name: <%= venue.owner.user.first_name %> <%= venue.owner.user.last_name %><br>
- 	<p></p>
+ 	 <br>
+ <div class="hline"></div>
  <% end %>
+ <br>
+
  <% end %>
 
 <p></p>
 <p></p>
  <!-- Need to restrict this link to owners -->
+ <% if current_user.owner %>
  <%= link_to "Create New Venue", new_venue_path(@venue) %>
+ <% end %>
 
 

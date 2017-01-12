@@ -12,12 +12,9 @@
  *
  *= require_tree .
  *= require_self
+
  */
-/* @import "bootstrap";
-
-If using bootstrap: Make sure the file has .scss extension (or .sass for Sass syntax). If you have just generated a new Rails app, it may come with a .css file instead. If this file exists, it will be served instead of Sass, so rename it:
-
-$ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss 
+/* 
 
 
 */
@@ -27,6 +24,8 @@ $ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.s
  * padding-top: 70px;
   *padding-bottom: 30px;
 }*/
+
+@import "materialize";
 
 .nav-bar {
   font-family: "Century Gothic";
@@ -39,8 +38,32 @@ $ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.s
   color: black;
 }
 
-body {
-background-color: lavender; 
-font-family: "Century Gothic";
-margin: 2em;
+#myFooter{
+	background-color: #d3d3d3;
 }
+
+#myHeader{
+	background-color: #d3d3d3;
+	margin: 1em;
+}
+
+html, body {
+background-color: white; 
+font-family: "Century Gothic";
+margin: 0;
+padding: 0;
+
+}
+
+nav{
+	background-color: #d3d3d3;
+}
+
+#main_content{
+	margin: 5px 10%;
+}
+
+.hline {
+	width: 100%; height: 3px; background: red
+}
+
