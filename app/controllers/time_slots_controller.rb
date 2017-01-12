@@ -34,14 +34,21 @@ class TimeSlotsController < ApplicationController
 				flash[:notice] = "The time slot you have specified is already on the schedule or is not valid (ie start time is after end time. Please try again)."
       	redirect_to venue_path(@time_slot.venue_id)
 			end
+		else
+			if @time_slot.save
+				redirect_to time_slot_path(@time_slot)
+			else
+				flash[:notice] = "The time slot you have specified is already on the schedule or is not valid (ie start time is after end time. Please try again)."
+      	redirect_to venue_path(@time_slot.venue_id)
+			end
 		end
 
  	end
 
-	def request
-		@time_slot = TimeSlot.find(params[:id])
-		@time_slot.update_attributes(status: "pending")
-	end
+	# def request
+	# 	@time_slot = TimeSlot.find(params[:id])
+	# 	@time_slot.update_attributes(status: "pending")
+	# end
 
 	def edit
 		@time_slot = TimeSlot.find(params[:id])
@@ -75,7 +82,7 @@ class TimeSlotsController < ApplicationController
 	private
 
 	def time_slot_params
-		params.require(:time_slot).permit(:date, :start_time, :end_time, :promoter_id, :performer_id, :venue_id)
+		params.require(:time_slot).permit(:date, :start_time, :end_time, :promoter_id, :performer_id, :venue_id, :status)
 	end
 
 end

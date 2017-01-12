@@ -82,7 +82,7 @@
         <p></p>
         <h3>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h3>
       <%end%>
-      <%= button_to "Request", time_slot_path(time_slot), :method => :put %>
+      <%= button_to "Request", time_slot_path(time_slot), :method => :put, params: {"time_slot" => {status:  "pending"}} %>
     <%end%>
 
 
