@@ -1,9 +1,9 @@
 
 
 <h1>Welcome back <%= @user.first_name %>!</h1>
+<p> <%= link_to "Edit your user profile", edit_user_path(@user) %></p>
 
 <% if @user.owner %>
-Hi Owner!
 <p></p>
   You own: <br>
   <p></p>
@@ -28,7 +28,6 @@ Hi Owner!
 
 
 <% if @user.promoter %>
-    Hi Promoter!!!!
   <% if @user.promoter.venues %>
     <br>
     These are your venues: <br>
@@ -47,7 +46,7 @@ Hi Owner!
 
   		<% end %>
       <% end %>
-   
+
       <% end %>
       <% end %>
     <p></p>
@@ -57,7 +56,6 @@ Hi Owner!
 
 
 <% if @user.performer %>
-    hi performer
     <p></p>
     <% if @user.performer.time_slots %>
       These are your performances:
