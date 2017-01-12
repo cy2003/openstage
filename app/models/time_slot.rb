@@ -1,7 +1,7 @@
 class TimeSlot < ApplicationRecord
   belongs_to :venue
   belongs_to :performer, optional: true #change this from belongs_to to has_one?
-  belongs_to :promoter, optional: true #through: :venues #do we need this? 
+  belongs_to :promoter, optional: true #through: :venues #do we need this?
 
   validates :start_time, :end_time, presence:true
 
@@ -21,14 +21,14 @@ class TimeSlot < ApplicationRecord
   # 		errors.add(:not_correct_user_error, "You must be a promoter of venue to add a new time slot.")
   # 	end
   # end
-  # 
-  # 
+  #
+  #
   def date_is_in_future
   	if date < Date.today
   		errors.add(:date_error, "Time slot must be in the future.")
   	end
   end
-  	
+
 
 
   def filled_times
@@ -37,20 +37,23 @@ class TimeSlot < ApplicationRecord
 
   def time_slot_available
   	available = true
-  
-	venue = Venue.find(self.venue_id)	
-  	venue.time_slots.each do |time_slot|
-  		if time_slot.date == date
-	  		if(start_time - time_slot.end_time)*(time_slot.start_time - end_time) >=0
-	  			available = false
-	  			break
-	  		end
-	  	else
-	  	end
-  	end
-  	if !available
-  			errors.add(:availability_error, "Time slot is not available during these times.")
-  	end
+
+  	venue = Venue.find(self.venue_id)
+    	venue.time_slots.each do |time_slot|
+        unless self.id == time_slot.id
+
+      		if time_slot.date == date
+    	  		if(start_time - time_slot.end_time)*(time_slot.start_time - end_time) >=0
+    	  			available = false
+    	  			break
+    	  		end
+    	  	else
+    	  	end
+        end
+    	end
+    	if !available
+    			errors.add(:availability_error, "Time slot is not available during these times.")
+    	end
   end
 
 
@@ -69,7 +72,7 @@ class TimeSlot < ApplicationRecord
   # end time has to be after the start time
   # confirm that a promoter is creating it.
   # confirm that performer is requesting it.
-  # create and edit time slots 
+  # create and edit time slots
 
 
 end

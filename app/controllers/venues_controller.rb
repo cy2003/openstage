@@ -58,5 +58,4 @@ class VenuesController < ApplicationController
 		params.require(:venue).permit(:name, :street_address_1, :street_address_2, :city, :state, :zip_code, :owner_id, :promoter_id)
 	end
 
-
 end

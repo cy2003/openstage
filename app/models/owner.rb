@@ -14,5 +14,5 @@ class Owner < ApplicationRecord
 
 
   # needs to create a venue
-  # create login, edit and authenticate for each owner
+
 end
