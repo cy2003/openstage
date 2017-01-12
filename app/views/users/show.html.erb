@@ -32,10 +32,10 @@
     <br>
     These are your venues: <br>
     <% @user.promoter.venues.each do |venue| %>
-      <h2><%= venue.name %><br></h2>
+        <%= link_to "#{venue.name}", venue_path(venue) %>
       <% if venue.time_slots %>
     		<% venue.time_slots.all.each do |time_slot| %>
-    		  <% if time_slot.performer.user.first_name %>
+    		  <% if time_slot.performer %>
     				<h3>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h3>
     			<% else %>
     				<h3> No performer scheduled yet.</h3>

@@ -19,6 +19,7 @@ class TimeSlotsController < ApplicationController
 	end
 
 	def create
+
 		@time_slot = TimeSlot.new(time_slot_params)
 
 		#adding the specified date to the start and end times

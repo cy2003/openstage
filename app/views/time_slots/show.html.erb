@@ -2,7 +2,8 @@
 
 
 <h2>Venue: <%= @time_slot.venue.name %></h2>
-<% if @time_slot.venue.promoter.user.first_name %>
+<% binding.pry%>
+<% if @time_slot.performer %>
 	<h2>Performer: <%= @time_slot.performer.user.first_name %> <%= @time_slot.performer.user.last_name %></h2>
 <% else %>
 	<h2> No performer scheduled yet.</h2>
