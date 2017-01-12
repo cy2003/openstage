@@ -26,21 +26,29 @@ class TimeSlotsController < ApplicationController
 		#adding the specified date to the start and end times
 		# @time_slot.start_time = (@time_slot.date.to_s + " " + @time_slot.start_time.strftime("%H:%M:%S")).to_datetime.utc
 		# @time_slot.end_time = (@time_slot.date.to_s + " " + @time_slot.end_time.strftime("%H:%M:%S")).to_datetime.utc
-		if @time_slot.save
-			redirect_to time_slot_path(@time_slot)
-		else
-			flash[:notice] = "The time slot you have specified is already on the schedule or is not valid (ie start time is after end time. Please try again)."
-			binding.pry
-      		redirect_to venue_path(@time_slot.venue_id)
+		if @time_slot.performer_id
+			@time_slot.status = "booked"
+			if @time_slot.save
+				redirect_to time_slot_path(@time_slot)
+			else
+				flash[:notice] = "The time slot you have specified is already on the schedule or is not valid (ie start time is after end time. Please try again)."
+      	redirect_to venue_path(@time_slot.venue_id)
+			end
 		end
 
  	end
+
+	def request
+		@time_slot = TimeSlot.find(params[:id])
+		@time_slot.update_attributes(status: "pending")
+	end
 
 	def edit
 		@time_slot = TimeSlot.find(params[:id])
 	end
 
 	def update
+		binding.pry
 		@time_slot = TimeSlot.find(params[:id])
 		if @time_slot.update(time_slot_params)
 			redirect_to time_slot_path(@time_slot)

@@ -6,7 +6,7 @@
 <p></p>
   <%= link_to "Return Home", root_path, action: "get", method: "get" %>
   <p></p>
-  
+
 
 <% if @user.owner %>
 <p></p>
@@ -73,4 +73,18 @@
 
         <% end %>
     <% end %>
+    These are the available time slots:
+    <% TimeSlot.all.each do |time_slot| %>
+      <% if time_slot.status == "Available" %>
+        <h3>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h3>
+        <h3>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h3>
+        <h3>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h3>
+        <p></p>
+        <h3>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h3>
+      <%end%>
+      <%= button_to "Request", time_slot_path(time_slot), :method => :put %>
+    <%end%>
+
+
+
 <%  end %>
