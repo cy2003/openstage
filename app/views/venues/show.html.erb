@@ -18,14 +18,14 @@
  	<p></p>
  	<%= link_to "Return Home", root_path, action: "get", method: "get" %>
  	<p></p>
-	<%= link_to "Create New Time Slot", {controller: "time_slots", action: "new", venue: @venue.id} %>
+	<%= link_to "Create New Time Slot", {controller: "time_slots", action: "new", venue_id: @venue.id} %>
 
 
 	<h2>Shows for <%= @venue.name %></h2>
 
 	<% if !@venue.time_slots.blank? %>
 		<% @venue.time_slots.all.each do |time_slot| %>
-			<% if time_slot.performer.user.first_name %>
+			<% if time_slot.performer %>
 					<h2>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h2>
 				<% else %>
 					<h2> No performer scheduled yet.</h2>
