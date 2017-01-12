@@ -8,6 +8,9 @@ class TimeSlotsController < ApplicationController
 	end
 
 	def new
+		@venue = Venue.find(params[:venue_id])
+		@time_slot = TimeSlot.new
+
 		#binding.pry
 		# if authenticate_promoter
 		# else
