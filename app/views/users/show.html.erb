@@ -3,6 +3,11 @@
 <h1>Welcome back <%= @user.first_name %>!</h1>
 <p> <%= link_to "Edit your user profile", edit_user_path(@user) %></p>
 
+<p></p>
+  <%= link_to "Return Home", root_path, action: "get", method: "get" %>
+  <p></p>
+  
+
 <% if @user.owner %>
 <p></p>
   You own: <br>

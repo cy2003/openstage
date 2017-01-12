@@ -10,13 +10,6 @@ class TimeSlotsController < ApplicationController
 	def new
 		#binding.pry
 		# if authenticate_promoter
-		if !params[:venue_id]
-			create
-			return
-		else
-			@venue = Venue.find(params[:venue_id])
-			@time_slot = TimeSlot.new
-		end
 		# else
 		# 	flash[:notice] = "You must be a promoter to create a new time slot. SORRY!!!"
 		# 	redirect_to time_slots_path and return
