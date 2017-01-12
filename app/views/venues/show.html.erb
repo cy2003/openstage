@@ -3,42 +3,51 @@
 <p></p>
 <p></p>
 	<h2><%= @venue.name %> <br></h2>
-	<%= @venue.street_address_1 %><br>
- 	<%= @venue.street_address_2 %><br>
- 	<%= @venue.city %> <br>
- 	<%= @venue.state %> <br>
- 	<%= @venue.zip_code %> <br>
- 	<p></p>
+	<a href="<%= @venue.maps_url %>" target="_new">
+	<h5><%= @venue.street_address_1 %><br>
+	<% if @venue.street_address_2 != "" %>
+ 		<%= @venue.street_address_2 %><br>
+ 	<% end %>
+ 	<%= @venue.city %>, <%= @venue.state %><br>
 
- 	<%= link_to "Edit Venue", edit_venue_path(@venue) %>
+ 	<%= @venue.zip_code %> </a><br>
+ 	Owner: <%= @venue.owner.user.full_name %><br>
+ 	Promoter: <%= @venue.promoter.user.full_name %><br></h5>
+ 	<p></p>
+	<% if current_user.id == @venue.owner.user.id %>
+ 	<h3><%= link_to "Edit Venue", edit_venue_path(@venue) %></h3>
+ 	<p><%= link_to "Click here to delete this venue.", venue_path(@venue), method: :delete, data: {confirm: "Really delete this venue? Deleting this venue will delete associated time slots."} %></p>
+ 	<% end %>
 
 	<p></p>
-	 	<%= link_to "Return To All Venues", venues_path, action: "get", method: "get" %>
+	
  	<p></p>
  	<p></p>
- 	<%= link_to "Return Home", root_path, action: "get", method: "get" %>
+ 
  	<p></p>
+ 	<% if current_user.id == @venue.promoter.user.id %>
 	<%= link_to "Create New Time Slot", {controller: "time_slots", action: "new", venue_id: @venue.id} %>
-
-
-	<h2>Shows for <%= @venue.name %></h2>
+	<% end %>
+	<br>
+	<br>
+	<h4>Shows for <%= @venue.name %></h4>
 
 	<% if !@venue.time_slots.blank? %>
 		<% @venue.time_slots.all.each do |time_slot| %>
 			<% if time_slot.performer %>
-					<h2>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h2>
+					<h3>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h3>
 				<% else %>
-					<h2> No performer scheduled yet.</h2>
+					<h5> No performer scheduled yet.</h5>
 				<% end %>
 
-				<h3>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h3>
+				<h5>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h5>
 
-				<h3>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h3>
-				<h3>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h3>
+				<h5>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h5>
+				<h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
 				<br>
 		<% end %>
 	<% else %>
-			<h3> No performances scheduled. </h3>
+			<h5> No performances scheduled. </h5>
 	<% end %>
 
-	<%= link_to "Click here to delete this venue.", venue_path(@venue), method: :delete, data: {confirm: "Really delete this venue? Deleting this venue will delete associated time slots."} %>
+	

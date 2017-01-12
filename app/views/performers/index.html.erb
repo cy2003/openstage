@@ -7,7 +7,8 @@
 	
 	<% if performer.time_slots %>
 	<% if !performer.time_slots.empty? %>
-		<% performer.time_slots.each do |time_slot| %>
+		<%  sorted_array = performer.time_slots.sort_by {|x| [x.date, x.start_time] }%>
+		<% sorted_array.each do |time_slot| %>
 			
 			<%= time_slot.date.strftime("%A, %B %e, %Y") %>, <%= time_slot.start_time.strftime("%l:%M %P") %> - <%= time_slot.end_time.strftime("%l:%M %P")%> <%= link_to "#{time_slot.venue.name}", "/venues/#{time_slot.venue.id}"%><br>
 	

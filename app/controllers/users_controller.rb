@@ -42,6 +42,12 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
+    if @user.valid?
+      redirect_to user_path(@user) and return
+    else
+      flash[:notice] = "Failed to create update your account please try again"
+      redirect_to edit_user_path
+    end
   end
 
   def show
