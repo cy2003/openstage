@@ -1,29 +1,33 @@
 
 
 <h1>Welcome back <%= @user.first_name %>!</h1>
-<p> <%= link_to "Edit your user profile", edit_user_path(@user) %></p>
+<h5><p> <%= link_to "Edit your user profile", edit_user_path(@user) %></p></h5>
 
 <p></p>
   
   <p></p>
-
-
+<h5>Name: <%= @user.full_name %></h5>
+<h5>Phone: <%= @user.phone_number %></h5>
+<h5>Email: <%= @user.email %></h5>
+<br>
 <% if @user.owner %>
 <p></p>
-  You own: <br>
-  <p></p>
+  <h3>You own: </h3>
+ 
 
   <% if @user.owner %>
     <% if @user.owner.venues %>
       <% @user.owner.venues.each do |venue| %>
-          <%= link_to "#{venue.name}", venue_path(venue) %>
+          <h5><%= link_to "#{venue.name}", venue_path(venue) %></h5>
       <% end %>
     <% end %>
   <% end %>
   <p></p>
   <p></p>
   <p></p>
-   <%= link_to "Click here to create new venue.", new_venue_path(@venue)%>
+  <br>
+   <br>
+   <h5><%= link_to "Click here to create new venue", new_venue_path(@venue)%></h5>
 <% end %>
 
   <p></p>
@@ -53,8 +57,11 @@
 
   		<% end %>
       <% else %>
-        <h4> You currently are not managing any venues.</h4>
+        <h5> You currently are not managing any performances at this venue.</h5>
+
       <% end %>
+       <br>
+        <br>
       <% end %>
 
       <% end %>
@@ -68,26 +75,29 @@
 <% if @user.performer %>
     <p></p>
     <% if @user.performer.time_slots %>
-      These are your performances:
-        <% @user.performer.time_slots.each do |time_slot| %>
-        <h3>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h3>
-        <h3>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h3>
-        <h3>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h3>
-        <p></p>
-        <h3>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h3>
-
+      <h3>Your performances:</h3>
+        <%  sorted_array = @user.performer.time_slots.sort_by {|x| [x.date, x.start_time] }%>
+        <% sorted_array.each do |time_slot| %>
+        <h5>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h5>
+        <h5>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h5>
+        <h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
+        <h5> Venue: <%= link_to "#{time_slot.venue.name}", venue_path(time_slot.venue) %> </h5>
+        <h5>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h5>
+        <br>
         <% end %>
     <% end %>
-    These are the available time slots:
-    <% TimeSlot.all.each do |time_slot| %>
+    <h3>These are the available time slots:</h3>
+    <%  sorted_array = TimeSlot.all.sort_by {|x| [x.date, x.start_time] }%>
+    <% sorted_array.each do |time_slot| %>
       <% if time_slot.status == "Available" %>
-        <h3>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h3>
-        <h3>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h3>
-        <h3>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h3>
+        <h5>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h5>
+        <h5>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h5>
+        <h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
         <p></p>
-        <h3>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h3>
+        <h5>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h5>
       <%end%>
       <%= button_to "Request", time_slot_path(time_slot), :method => :put, params: {"time_slot" => {status:  "pending"}} %>
+      <br>
     <%end%>
 
 
