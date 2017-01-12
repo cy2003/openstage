@@ -1,0 +1,2 @@
+module TimeSlotApplicationHelper
+end

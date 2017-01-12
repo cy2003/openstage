@@ -3,6 +3,7 @@ class Promoter < ApplicationRecord
   belongs_to :user
   has_many :time_slots, through: :venues
   has_many :performers, through: :venues
+  has_many :time_slot_applications, through: :venues
 
 
   def all

@@ -3,6 +3,7 @@ class Performer < ApplicationRecord
   belongs_to :user
   has_many :venues, through: :time_slots
   has_many :promoters, through: :time_slots
+  has_many :time_slot_applications
 
   # view and request for time slots
   # make requirment that if time slot is accepted it's automatically confirmed.

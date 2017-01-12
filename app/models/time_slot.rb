@@ -2,6 +2,7 @@ class TimeSlot < ApplicationRecord
   belongs_to :venue
   belongs_to :performer, optional: true #change this from belongs_to to has_one?
   belongs_to :promoter, optional: true #through: :venues #do we need this?
+  has_many :time_slot_applications
 
   validates :start_time, :end_time, presence:true
 
