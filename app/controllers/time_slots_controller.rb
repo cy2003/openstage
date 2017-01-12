@@ -10,6 +10,7 @@ class TimeSlotsController < ApplicationController
 	def new
 		#binding.pry
 		# if authenticate_promoter
+		binding.pry
 			@venue = Venue.find(params[:venue])
 			@time_slot = TimeSlot.new
 		# else
@@ -19,6 +20,7 @@ class TimeSlotsController < ApplicationController
 	end
 
 	def create
+		#binding.pry
 		@time_slot = TimeSlot.new(time_slot_params)
 
 		#adding the specified date to the start and end times

@@ -1,16 +1,28 @@
 <h1>List of Performers on OpenStage</h1>
 
-<% @performers.each do |performer|%>
+<% @performers.each do |performer|%><br>
+=================================================
 	<h3><%= link_to "#{performer.user.first_name} #{performer.user.last_name}", "/users/#{performer.user.id}"%></h3>
 	
 	<% if performer.time_slots %>
 		<% performer.time_slots.each do |time_slot| %>
 			
 			<%= time_slot.date.strftime("%A, %B %e, %Y") %>, <%= time_slot.start_time.strftime("%l:%M %P") %> - <%= time_slot.end_time.strftime("%l:%M %P")%> <%= link_to "#{time_slot.venue.name}", "/venues/#{time_slot.venue.id}"%><br>
+	
 			
 			<% end %>
+			<% else %>
+			No currently scheduled performances.
+			
 		<br>
 		<br>
 	<% end %>
 
+
 <% end %>
+	=================================================
+<p></p>
+<p></p>
+<p></p>
+ 	<%= link_to "Return Home", root_path, action: "get", method: "get" %>
+ 	<p></p>
