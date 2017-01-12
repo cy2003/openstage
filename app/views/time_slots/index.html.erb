@@ -12,7 +12,7 @@
 		Nothing booked for this venue yet.
 	<% else %>
 		<% venue.time_slots.all.each do |time_slot| %>
-			<% if time_slot.performer.user.first_name %>
+			<% if time_slot.performer %>
 
 				<h2>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h2>
 				<h3>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h3>
@@ -20,13 +20,16 @@
 				<h3>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h3>
 
 				<% if time_slot.status == "Available" %>
-					<% binding.pry %>
-					<%= button_to "Select This date", {controller: "time_slots", action: "update", performer: current_user.performer.id } %>
+				
 				<% end %>
 				-------------
 			<% else %>
 
-			<h3> No performer scheduled yet.</h3>
+			<h2> No performer scheduled yet.</h2>
+			<h3>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h3>
+			<h3>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h3>
+			<h3>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h3>
+
 			<% end %>
 
 		<% end %>

@@ -28,12 +28,7 @@
       <%= f.number_field :performer_id %>
       <p></p>
 
-       <%= f.label :venue_id  %>  <br>
-      <%= f.number_field :venue_id %>
-      <p></p>
-
-      <%= f.submit %>
-
+      <%= f.button :submit, name: "time_slot[venue_id]", value: @venue.id %>
     <% end %>
   <% end %>
 <% end %>

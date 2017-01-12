@@ -8,11 +8,11 @@ class TimeSlotsController < ApplicationController
 	end
 
 	def new
+		@venue = Venue.find(params[:venue_id])
+		@time_slot = TimeSlot.new
+
 		#binding.pry
 		# if authenticate_promoter
-		binding.pry
-			@venue = Venue.find(params[:venue])
-			@time_slot = TimeSlot.new
 		# else
 		# 	flash[:notice] = "You must be a promoter to create a new time slot. SORRY!!!"
 		# 	redirect_to time_slots_path and return
@@ -20,7 +20,7 @@ class TimeSlotsController < ApplicationController
 	end
 
 	def create
-		#binding.pry
+
 		@time_slot = TimeSlot.new(time_slot_params)
 
 		#adding the specified date to the start and end times
@@ -30,7 +30,8 @@ class TimeSlotsController < ApplicationController
 			redirect_to time_slot_path(@time_slot)
 		else
 			flash[:notice] = "The time slot you have specified is already on the schedule or is not valid (ie start time is after end time. Please try again)."
-      		redirect_to new_time_slot_path
+			binding.pry
+      		redirect_to venue_path(@time_slot.venue_id)
 		end
 
  	end

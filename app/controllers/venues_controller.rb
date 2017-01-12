@@ -34,9 +34,8 @@ class VenuesController < ApplicationController
 			redirect_to venue_path(@venue)
 		else
 			flash[:notice] = "Update not valid. Try again."
-			render :edit 
+			render :edit
 		end
-
 	end
 
 	def show

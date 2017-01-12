@@ -1,6 +1,7 @@
 
 
 <h1>Welcome back <%= @user.first_name %>!</h1>
+<p> <%= link_to "Edit your user profile", edit_user_path(@user) %></p>
 
 <p></p>
   <%= link_to "Return Home", root_path, action: "get", method: "get" %>
@@ -8,7 +9,6 @@
   
 
 <% if @user.owner %>
-Hi Owner!
 <p></p>
   You own: <br>
   <p></p>
@@ -33,15 +33,14 @@ Hi Owner!
 
 
 <% if @user.promoter %>
-    Hi Promoter!!!!
   <% if @user.promoter.venues %>
     <br>
     These are your venues: <br>
     <% @user.promoter.venues.each do |venue| %>
-      <h2><%= venue.name %><br></h2>
+        <%= link_to "#{venue.name}", venue_path(venue) %>
       <% if venue.time_slots %>
     		<% venue.time_slots.all.each do |time_slot| %>
-    		  <% if time_slot.performer.user.first_name %>
+    		  <% if time_slot.performer %>
     				<h3>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h3>
     			<% else %>
     				<h3> No performer scheduled yet.</h3>
@@ -52,7 +51,7 @@ Hi Owner!
 
   		<% end %>
       <% end %>
-   
+
       <% end %>
       <% end %>
     <p></p>
@@ -62,7 +61,6 @@ Hi Owner!
 
 
 <% if @user.performer %>
-    hi performer
     <p></p>
     <% if @user.performer.time_slots %>
       These are your performances:
