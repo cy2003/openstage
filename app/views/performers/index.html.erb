@@ -1,10 +1,12 @@
 <h1>List of Performers on OpenStage</h1>
-
+<div class="hline"></div>
 <% @performers.each do |performer|%><br>
-=================================================
+
+
 	<h3><%= link_to "#{performer.user.first_name} #{performer.user.last_name}", "/users/#{performer.user.id}"%></h3>
 	
 	<% if performer.time_slots %>
+	<% if !performer.time_slots.empty? %>
 		<% performer.time_slots.each do |time_slot| %>
 			
 			<%= time_slot.date.strftime("%A, %B %e, %Y") %>, <%= time_slot.start_time.strftime("%l:%M %P") %> - <%= time_slot.end_time.strftime("%l:%M %P")%> <%= link_to "#{time_slot.venue.name}", "/venues/#{time_slot.venue.id}"%><br>
@@ -17,10 +19,12 @@
 		<br>
 		<br>
 	<% end %>
-
+	<% end %>
+	<br>
+<div class="hline"></div>
 
 <% end %>
-	=================================================
+
 <p></p>
 <p></p>
 <p></p>
