@@ -42,12 +42,15 @@
   <% if @user.promoter.venues %>
         <%= link_to "Click here to see pending time slots due for approval.", time_slot_applications_path %>
     <% if !@user.promoter.venues.empty? %>
+    <br>
+    <br>
       <h4>These are your venues:</h4>
     <% else %>
       <h5>- You don't promote any venues yet</h5>
     <% end %>
 
     <% @user.promoter.venues.each do |venue| %>
+    <br>
       <h4><%= link_to "#{venue.name}", venue_path(venue) %></h4>
          <% if current_user.id == venue.promoter.user.id %>
            <%= link_to "Click venue to add, edit or delete time slots for this venue.", venue_path(venue) %>
@@ -56,13 +59,13 @@
         <% if !venue.time_slots.empty? %>
     		  <% venue.time_slots.all.each do |time_slot| %>
     		    <% if time_slot.performer %>
-      				<h4>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h4>
+      				<h5>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h5>
 
 
             <% elsif time_slot.status == "Pending" %>
-              <br> PLACE HOLDER
+              <br>
             <% else %>
-      		    <h4> No performer scheduled yet.</h4>
+      		    <h5> No performer scheduled yet.</h5>
       		  <% end %>
             <p>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></p>
       			<p>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></p>
@@ -135,9 +138,9 @@
           <% end %>
 
           <% if x == true %>
-            <%= button_to "Request", time_slot_applications_path, :method => :post, params: {time_slot_id:  time_slot.id, performer_id: current_user.performer.id, status: "Pending"} %>
+            <%= button_to "Request", time_slot_applications_path, :method => :post, params: {time_slot_id:  time_slot.id, performer_id: current_user.performer.id, status: "Pending"} %><br>
           <% else %>
-            <h5><b>You've already requested this time slot.</b></h5>
+            <h5><b>You've requested this time slot.</b></h5><br>
           <% end %>
 
       <%end%>
