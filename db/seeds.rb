@@ -38,3 +38,23 @@ one_world = Venue.new(name: "One World Trade Center", street_address_1: "1 World
 rob_owner.venues << one_world
 one_world.promoter = ian_promoter
 one_world.save
+
+Checkboxestime_slot1 = TimeSlot.create(venue_id: 1, performer_id: nil, date: "2017-01-18", start_time: "2017-01-18 20:00:00", end_time: "2000-01-01 21:00:00")
+
+time_slot2 = TimeSlot.create(venue_id: 1, performer_id: nil, date: "2017-01-20", start_time: "2017-01-20 20:00:00", end_time: "2000-01-01 21:00:00")
+
+time_slot3 = TimeSlot.create(venue_id: 1, performer_id: nil, date: "2017-02-15", start_time: "2017-02-15 20:00:00", end_time: "2000-01-01 21:00:00")
+
+time_slot4 = TimeSlot.create(venue_id: 1, performer_id: nil, date: "2017-02-20", start_time: "2017-02-20 19:00:00", end_time: "2000-01-01 20:00:00")
+
+time_slot5 = TimeSlot.create(venue_id: 1, performer_id: nil, date: "2017-03-1", start_time: "2017-03-01 18:00:00", end_time: "2000-01-01 19:00:00")
+
+time_slot6 = TimeSlot.create(venue_id: 2, performer_id: nil, date: "2017-01-19", start_time: "2017-01-19 20:00:00", end_time: "2000-01-01 21:00:00")
+
+time_slot7 = TimeSlot.create(venue_id: 2, performer_id: nil, date: "2017-01-22", start_time: "2017-01-22 20:00:00", end_time: "2000-01-01 21:00:00")
+
+time_slot8 = TimeSlot.create(venue_id: 2, performer_id: nil, date: "2017-02-15", start_time: "2017-02-15 21:00:00", end_time: "2000-01-01 22:00:00")
+
+time_slot9 = TimeSlot.create(venue_id: 2, performer_id: nil, date: "2017-02-20", start_time: "2017-02-20 19:00:00", end_time: "2000-01-01 20:00:00")
+
+time_slot10 = TimeSlot.create(venue_id: 2, performer_id: nil, date: "2017-03-1", start_time: "2017-03-01 18:00:00", end_time: "2000-01-01 19:00:00") are missing on the create page.
