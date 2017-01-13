@@ -20,10 +20,10 @@
  	<% end %>
 
 	<p></p>
-	
+
  	<p></p>
  	<p></p>
- 
+
  	<p></p>
  	<% if current_user.id == @venue.promoter.user.id %>
 	<%= link_to "Create New Time Slot", {controller: "time_slots", action: "new", venue_id: @venue.id} %>
@@ -46,8 +46,11 @@
 				<h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
 				<br>
 		<% end %>
+
 	<% else %>
 			<h5> No performances scheduled. </h5>
 	<% end %>
 
-	
+	<%= month_calendar do |date| %>
+		<%= date %>
+	<% end %>
