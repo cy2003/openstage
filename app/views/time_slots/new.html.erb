@@ -7,11 +7,11 @@
 <% end %>
 <p></p>
 
-<h2>For Venue:</h2>
+<h2>For Venue: <%= @venue.name %></h2>
 <!-- need to insert venue name -->
 <!-- consider changing data table to have date and then start/end times -->
 
-<% if current_user.promoter %>
+<h5><% if current_user.promoter %>
   <% if current_user.promoter.id == @venue.promoter.id %>
     <%= form_for(@time_slot) do |f| %>
 
@@ -25,18 +25,18 @@
 
       <%= f.label :end_time  %><br>
       <%= f.time_field :end_time %><br>
+     
+      <p></p>
+      
       <p></p>
 
-      <%= f.label :performer_id  %>  <br>
-      <%= f.number_field :performer_id %>
       <p></p>
 
-      <%= f.button :submit, name: "time_slot[venue_id]", value: @venue.id %>
+      <%= f.button :submit, name: "time_slot[venue_id]", value: @venue.id %></h5>
     <% end %>
   <% end %>
 <% end %>
+<br>
+<br>
 
-<p></p>
-<p></p>
 
-<%= link_to "Return Home", root_path, action: "get", method: "get" %>

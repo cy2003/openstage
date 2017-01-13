@@ -12,7 +12,9 @@
 				<% if !venue.time_slots.empty? %>
 				<%  sorted_array = venue.time_slots.sort_by {|x| [x.date, x.start_time] }%>
 				<% sorted_array.each do |time_slot| %>
+				<% if time_slot.performer %>
 					<%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %> on <%= time_slot.date.strftime("%A, %B %e, %Y")%>, <%= time_slot.start_time.strftime("%l:%M %P") %> - <%= time_slot.end_time.strftime("%l:%M %P")%> <br>
+					<% end %>
 				<% end %>
 			<% else %>
 				Currently no scheduled performances at this venue.

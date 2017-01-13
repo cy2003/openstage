@@ -37,7 +37,6 @@
 	 	<% if current_user.id == @venue.promoter.user.id %>
 			<%= link_to "Create New Time Slot", {controller: "time_slots", action: "new", venue_id: @venue.id} %>
 		<% end %>
-
 		<br>
 
 		<h4 style="color:#5398e5;"><u>Shows for <%= @venue.name %></u></h4>
@@ -57,7 +56,15 @@
 					<br>
 			<% end %>
 
+
 		<% else %>
 				<h5> No performances scheduled </h5>
+
+				<% if  current_user.id == @venue.promoter.user.id%>
+					<%= link_to "Edit Time Slot", {controller: "time_slots", action: "edit", venue_id: @venue.id} %><br>
+					 <%= link_to "Delete Time Slot.", time_slot_path(time_slot), method: :delete %>
+					<br>
+				<% end %>
+
 		<% end %>
 	<% end %>
