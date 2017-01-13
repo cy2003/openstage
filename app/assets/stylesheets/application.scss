@@ -14,7 +14,7 @@
  *= require_self
 
  */
-/* 
+/*
 
 
 */
@@ -48,7 +48,7 @@
 }
 
 html, body {
-background-color: white; 
+background-color: white;
 font-family: "Century Gothic";
 margin: 0;
 padding: 0;
@@ -74,5 +74,10 @@ nav{
 .box    { display: inline-block;
             /* size, color, etc. */ }
 
-            
-
+.flash_notice_red {
+  font-family: "Arial";
+  background-color: #c94549;
+  color: white;
+  font-size: 2em;
+  padding: 5px;
+}

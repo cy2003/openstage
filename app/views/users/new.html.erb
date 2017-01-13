@@ -1,3 +1,8 @@
+<% if flash[:notice] %>
+  <span class="flash_notice_red"><%= flash[:notice] %></span>
+  <% flash[:notice] = nil %>
+<% end %>
+
 <h1>Welcome to Open Stage</h1>
 <h2>Please create a user</h2>
 
@@ -34,20 +39,24 @@
 
   <p></p>
 
-    I am a: (check all that apply)<br>
-    <%= f.label :performer %>
-    <%= f.check_box :performer %>
-    <br>
-    <%= f.label :promoter %>
-    <%= f.check_box :promoter %>
-    <br>
-    <%= f.label :owner %>
-    <%= f.check_box :owner %>
+  I am a: (check all that apply)
+  <br>
+  <%= f.check_box :performer %>
+  <%= f.label :performer %>
+
+  <br>
+  <%= f.check_box :promoter %>
+  <%= f.label :promoter %>
+
+  <br>
+  <%= f.check_box :owner %>
+  <%= f.label :owner %>
 
   <p></p>
 
   <%= f.submit %>
 <% end %>
+
 
 <p></p>
 
