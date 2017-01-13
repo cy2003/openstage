@@ -1,6 +1,7 @@
 
 
 <h1>Welcome back <%= @user.first_name %>!</h1>
+<%= flash[:notice] %>
 <h5><p> <%= link_to "Edit your user profile", edit_user_path(@user) %></p></h5>
 
 <p></p>
@@ -9,7 +10,7 @@
 <h5>Name: <%= @user.full_name %></h5>
 <h5>Phone: <%= @user.phone_number %></h5>
 <h5>Email: <%= @user.email %></h5>
-<br>
+
 <% if @user.owner %>
 <p></p>
   <h3>You own: </h3>
@@ -30,19 +31,23 @@
    <h5><%= link_to "Click here to create new venue", new_venue_path(@venue)%></h5>
 <% end %>
 
-  <p></p>
-
-
-    <p></p>
+ 
 
 
 <% if @user.promoter %>
-<% binding.pry %>
+
   <% if @user.promoter.venues %>
+    <%= link_to "Click here to see pending time slots due for approval.", time_slot_applications_path %>
+    <br>
     <br>
     <h4>These are your venues: </h4><br>
     <% @user.promoter.venues.each do |venue| %>
         <h3><%= link_to "#{venue.name}", venue_path(venue) %></h3>
+         <% if current_user.id == venue.promoter.user.id %>
+        <%= link_to "Click venue to add, edit or delete time slots for this venue.", venue_path(venue) %>
+        <% end %>
+
+
       <% if venue.time_slots %>
       <% if !venue.time_slots.empty? %>
     		<% venue.time_slots.all.each do |time_slot| %>
@@ -50,23 +55,33 @@
 
       				<h4>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h4>
           <% elsif time_slot.status == "pending" %>
-            <!-- <% #link_to "Click here to review applications", time_slot_path %> -->
+       
       			<% else %>
-      				<h3> No performer scheduled yet.</h3>
+      				<h3> No performer scheduled yet</h3>
       			<% end %>
   		    <p>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></p>
     			<p>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></p>
     			<p>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></p>
+        
+          <% if current_user.id == time_slot.venue.promoter.user.id %>
+
+            <%= link_to "Click here to edit this time slot.", edit_time_slot_path(time_slot)%>
+            <p></p>
+            <p></p>
+          <%= link_to "Click here to delete this time slot.", time_slot_path(time_slot), method: :delete %>
+       
+
+          <% end %>
 
   		<% end %>
+
       <% else %>
         <h5> You currently are not managing any performances at this venue.</h5>
 
       <% end %>
-       <br>
-        <br>
       <% end %>
-
+<br>
+<br>
       <% end %>
       <% end %>
     <p></p>
@@ -90,18 +105,21 @@
         <% end %>
     <% end %>
     <h3>These are the available time slots:</h3>
+     <% binding.pry %>
+
     <%  sorted_array = TimeSlot.all.sort_by {|x| [x.date, x.start_time] }%>
     <% sorted_array.each do |time_slot| %>
-      <% if time_slot.status == "Available" %>
-        <h5>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h5>
-        <h5>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h5>
-        <h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
-        <p></p>
-        <h5>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h5>
-      <%end%>
-      <%= button_to "Request", time_slot_applications_path, :method => :post, params: {time_slot_id:  time_slot.id, performer_id: current_user.performer.id, status: "pending"} %>
-    <%end%>
-
-
-
-<%  end %>
+      <% if time_slot.status == "Available" || time_slot.status == "Pending" %>
+          <h5>Venue: <%= time_slot.venue.name %></h5>
+          <h5>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h5>
+          <h5>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h5>
+          <h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
+          <p></p>
+          <h5>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h5>
+          <h5>Status: <%= time_slot.status %></h5>
+                   <% if !(current_user.id ==  @time_slot_applications.peformer.userid)   %>
+              <%= button_to "Request", time_slot_applications_path, :method => :post, params: {time_slot_id:  time_slot.id, performer_id: current_user.performer.id, status: "Pending"} %>
+          <% end %>
+      <%  end %>
+    <% end %>
+<% end %>
