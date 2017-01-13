@@ -2,7 +2,7 @@
 <% if @time_slot.time_slot_applications.each do |time_slot_application|%>
 	<%= time_slot_application.performer.user.first_name %>
 	<%= time_slot_application.performer.user.last_name %>
-	<%= button_to "Approve", time_slot_path(time_slot_application.time_slot), :method => :put, params: {time_slot: {status: "booked"}} %>
+	<%= button_to "Approve", time_slot_path(time_slot_application.time_slot), :method => :put, params: {time_slot: {status: "Booked"}} %>
 
 <% end %>
 <% end %>

@@ -26,12 +26,12 @@
       <h5>- You don't own any venues yet</h5>
     <% end %>
 
-  <% end %> 
+  <% end %>
 <% end %>
 
 
 
-    
+
 <!-- VENUE OWNER INFO ENDS -->
 
 
@@ -59,15 +59,16 @@
       				<h4>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h4>
 
 
-            <% elsif time_slot.status == "pending" %>
-              PLACE HOLDER
+            <% elsif time_slot.status == "Pending" %>
+              <br> PLACE HOLDER
             <% else %>
-      		    <h3> No performer scheduled yet.</h3>
+      		    <h4> No performer scheduled yet.</h4>
       		  <% end %>
+            <p>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></p>
+      			<p>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></p>
+      			<p>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></p>
           <% end %>
-          <p>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></p>
-    			<p>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></p>
-    			<p>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></p>
+
         <% end %>
 
       <% else %>
@@ -87,9 +88,8 @@
     <% if !@user.performer.time_slots.empty? %>
       <h3>Your performances:</h3>
     <% else %>
-      <h5>- There are no shows available.</h5>
+      <h5>- You're not booked for any shows.</h5>
     <% end %>
-
     <% sorted_array = @user.performer.time_slots.sort_by {|x| [x.date, x.start_time] }%>
     <% sorted_array.each do |time_slot| %>
       <h5>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h5>
@@ -99,26 +99,51 @@
       <h5>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h5>
       <br>
     <% end %>
+
   <% end %>
 
-  <% sorted_array = TimeSlot.all.sort_by {|x| [x.date, x.start_time] }%>
-    <% if !sorted_array.empty? %>
+
+    <% sorted_array = TimeSlot.all.sort_by {|x| [x.date, x.start_time] }%>
+    <% y = true %>
+    <% sorted_array.each do |element| %>
+      <% if element.status=="Available" || element.status == "Pending" %>
+        <% y= false %>
+      <% end %>
+    <% end %>
+
+
+    <% if y == false %>
       <h3>These are the available time slots:</h3>
     <% end %>
 
 
     <% sorted_array.each do |time_slot| %>
-      <% if time_slot.status == "Available" %>
+      <% if time_slot.status == "Available" || time_slot.status == "Pending" %>
+        <h5>Venue: <%= time_slot.venue.name %>
+
         <h5>Day: <%= time_slot.date.strftime("%A, %B %e, %Y") %></h5>
         <h5>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h5>
         <h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
         <p></p>
         <h5>Promoter: <%= time_slot.venue.promoter.user.first_name %> <%= time_slot.venue.promoter.user.last_name %></h5>
+
+        <% x = true %>
+        <% time_slot.time_slot_applications.each do |time_slot_application| %>
+              <% if time_slot_application.performer.user.id == current_user.id %>
+                <% x=false %>
+              <%end%>
+          <% end %>
+
+          <% if x == true %>
+            <%= button_to "Request", time_slot_applications_path, :method => :post, params: {time_slot_id:  time_slot.id, performer_id: current_user.performer.id, status: "Pending"} %>
+          <% else %>
+            <h5><b>You've already requested this time slot.</b></h5>
+          <% end %>
+
       <%end%>
+    <%end%>
+
 <!-- figure out how to avoid performer applying for same time slot more than once -->
 <!-- something like: if !(current_user.id ==  @time_slot_applications.peformer.userid)   -->
-      <%= button_to "Request", time_slot_applications_path, :method => :post, params: {time_slot_id:  time_slot.id, performer_id: current_user.performer.id, status: "pending"} %>
-    <%end%>
 <% end %>
 <!-- PERFORMER INFO ENDS -->
-

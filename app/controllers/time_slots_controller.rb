@@ -25,8 +25,8 @@ class TimeSlotsController < ApplicationController
 
 		@time_slot = TimeSlot.new(time_slot_params)
 		if @time_slot.performer_id
-		
-			@time_slot.status = "booked"
+
+			@time_slot.status = "Booked"
 			if @time_slot.save
 				redirect_to time_slot_path(@time_slot)
 			else
@@ -44,10 +44,6 @@ class TimeSlotsController < ApplicationController
 
  	end
 
-	# def request
-	# 	@time_slot = TimeSlot.find(params[:id])
-	# 	@time_slot.update_attributes(status: "pending")
-	# end
 
 	def edit
 		@time_slot = TimeSlot.find(params[:id])
@@ -56,7 +52,7 @@ class TimeSlotsController < ApplicationController
 	def update
 		@time_slot = TimeSlot.find(params[:id])
 		if @time_slot.update(time_slot_params)
-			if @time_slot.status == "booked"
+			if @time_slot.status == "Booked"
 				binding.pry
 				if @time_slot.time_slot_applications.each do |time_slot_application|
 					time_slot_application.status = ""

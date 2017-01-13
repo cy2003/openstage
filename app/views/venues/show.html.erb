@@ -12,7 +12,9 @@
 
  	<%= @venue.zip_code %> </a><br>
  	Owner: <%= @venue.owner.user.full_name %><br>
- 	Promoter: <%= @venue.promoter.user.full_name %><br></h5>
+	<% if @venue.promoter %>
+ 		Promoter: <%= @venue.promoter.user.full_name %><br></h5>
+	<%end %>
  	<p></p>
 	<% if current_user.id == @venue.owner.user.id %>
  	<h3><%= link_to "Edit Venue", edit_venue_path(@venue) %></h3>
@@ -25,10 +27,15 @@
  	<p></p>
 
  	<p></p>
- 	<% if current_user.id == @venue.promoter.user.id %>
+	<% if @venue.promoter %>
 
-	<%= link_to "Create New Time Slot", {controller: "time_slots", action: "new", venue_id: @venue.id} %>
-	<% end %>
+	 	<% if current_user.id == @venue.promoter.user.id %>
+
+
+		<%= link_to "Create New Time Slot", {controller: "time_slots", action: "new", venue_id: @venue.id} %>
+		<% end %>
+	<%end %>
+
 	<br>
 	<br>
 	<h4>Shows for <%= @venue.name %></h4>
@@ -45,7 +52,7 @@
 
 				<h5>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h5>
 				<h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
-				
+
 				<% if  current_user.id == @venue.promoter.user.id%>
 					<%= link_to "Edit Time Slot", {controller: "time_slots", action: "edit", venue_id: @venue.id} %><br>
 					 <%= link_to "Delete Time Slot.", time_slot_path(time_slot), method: :delete %>
