@@ -2,12 +2,13 @@
 <% @timeslots.each do |timeslot| %>
   <% if timeslot.time_slot_applications %>
     <% timeslot.time_slot_applications.each do |time_slot_application| %>
-      <%= time_slot_application.time_slot.venue.name %><br>
-      <%= time_slot_application.time_slot.date.strftime("%A, %B %e, %Y") %><br>
+      <h4><%= time_slot_application.time_slot.venue.name %><br></h4>
+      <h5><%= time_slot_application.time_slot.date.strftime("%A, %B %e, %Y") %><br>
       <%= time_slot_application.time_slot.start_time.strftime("%l:%M %P") %><br>
       <%= time_slot_application.time_slot.end_time.strftime("%l:%M %P") %><br>
       Artist: <%= time_slot_application.performer.user.full_name %><br>
-      <%= time_slot_application.status %><br>
+      Promoter: <%= time_slot_application.time_slot.venue.promoter.user.full_name %><br>
+      <%= time_slot_application.status %><br></h5>
       <% if !(time_slot_application.status == "Booked" || time_slot_application.status == "Denied")%>
         <% if current_user.id == time_slot_application.time_slot.venue.promoter.user.id %>
           <%= button_to "Book this Artist", time_slot_application_path(time_slot_application), :method => :put, params: { status: "Booked", performer_id: time_slot_application.performer_id} %>

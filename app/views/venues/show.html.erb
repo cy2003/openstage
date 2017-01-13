@@ -15,7 +15,7 @@
 	<% if @venue.promoter %>
  		Promoter: <%= @venue.promoter.user.full_name %><br></h5>
   <% else %>
-    <div style="color:red;">- Promoter: No promoter associated with this venue</div>
+    <div>Promoter: No promoter associated with this venue</div>
 	<%end %>
  	<p></p>
 	<% if current_user.id == @venue.owner.user.id %>
@@ -35,24 +35,16 @@
 		<br>
 
  	<p></p>
-	<% if @venue.promoter %>
-
-	 	<% if current_user.id == @venue.promoter.user.id %>
 
 
-		<%= link_to "Create New Time Slot", {controller: "time_slots", action: "new", venue_id: @venue.id} %>
-		<% end %>
-	<%end %>
-
-	<br>
-	<br>
-		<h4 style="color:#5398e5;"><u>Shows for <%= @venue.name %></u></h4>
+		<h4><u>Shows for <%= @venue.name %></u></h4>
 
 		<% if !@venue.time_slots.blank? %>
 
 			<% @venue.time_slots.all.each do |time_slot| %>
+
 				<% if time_slot.performer %>
-					<h3>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h3>
+					<h5>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h3>
 				<% else %>
 					<h5> No performer scheduled yet.</h5>
 				<% end %>
@@ -61,20 +53,18 @@
 					<h5>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h5>
 					<h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
 					<br>
-			<% end %>
 
+				<% if  current_user.id == @venue.promoter.user.id%>
+						<%= link_to "Edit Time Slot", {controller: "time_slots", action: "edit", venue_id: @venue.id} %><br>
+
+						 <%= link_to "Delete Time Slot", time_slot_path(time_slot), method: :delete %>
+						<br>
+				<% end %>
+
+			<% end %>
 
 		<% else %>
 				<h5> No performances scheduled </h5>
-
-				<h5>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h5>
-				<h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
-
-				<% if  current_user.id == @venue.promoter.user.id%>
-					<%= link_to "Edit Time Slot", {controller: "time_slots", action: "edit", venue_id: @venue.id} %><br>
-					 <%= link_to "Delete Time Slot.", time_slot_path(time_slot), method: :delete %>
-					<br>
-				<% end %>
 
 		<% end %>
 	<% end %>
