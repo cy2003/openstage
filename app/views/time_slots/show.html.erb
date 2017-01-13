@@ -7,22 +7,25 @@
 <% end %>
 <% end %>
 
-<h2>Venue: <%= @time_slot.venue.name %></h2>
+<h3>Venue: <%= @time_slot.venue.name %></h3>
 
 <% if @time_slot.performer %>
-	<h2>Performer: <%= @time_slot.performer.user.first_name %> <%= @time_slot.performer.user.last_name %></h2>
+	<h4>Performer: <%= @time_slot.performer.user.first_name %> <%= @time_slot.performer.user.last_name %></h4>
 <% else %>
-	<h2> No performer scheduled yet.</h2>
+	<h4> No performer scheduled yet.</h4>
 <% end %>
 
-<h3>Day: <%= @time_slot.date.strftime("%A, %B %e, %Y") %></h3>
-<h3>Start Time: <%= @time_slot.start_time.strftime("%l:%M %P") %></h3>
-<h3>End Time: <%= @time_slot.end_time.strftime("%l:%M %P")%></h3>
+<h5>Day: <%= @time_slot.date.strftime("%A, %B %e, %Y") %></h5>
+<h5>Start Time: <%= @time_slot.start_time.strftime("%l:%M %P") %></h5>
+<h5>End Time: <%= @time_slot.end_time.strftime("%l:%M %P")%></h5>
 <p></p>
-<h3>Promoter: <%= @time_slot.venue.promoter.user.first_name %> <%= @time_slot.venue.promoter.user.last_name %></h3>
-<p></p>
-<p></p>
+<h5>Promoter: <%= @time_slot.venue.promoter.user.first_name %> <%= @time_slot.venue.promoter.user.last_name %></h5>
+<br>
+<br>
+
+<% if current_user.id == @time_slot.venue.promoter.id %>
 <%= link_to "Click here to edit this time slot.", edit_time_slot_path(@time_slot)%>
 <p></p>
 <p></p>
 <%= link_to "Click here to delete this time slot.", time_slot_path(@time_slot), method: :delete %>
+<% end %>

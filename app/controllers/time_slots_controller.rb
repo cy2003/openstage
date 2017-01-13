@@ -10,6 +10,8 @@ class TimeSlotsController < ApplicationController
 	def new
 		@venue = Venue.find(params[:venue_id])
 		@time_slot = TimeSlot.new
+		@performers = Performer.all
+
 
 		#binding.pry
 		# if authenticate_promoter
@@ -22,11 +24,8 @@ class TimeSlotsController < ApplicationController
 	def create
 
 		@time_slot = TimeSlot.new(time_slot_params)
-
-		#adding the specified date to the start and end times
-		# @time_slot.start_time = (@time_slot.date.to_s + " " + @time_slot.start_time.strftime("%H:%M:%S")).to_datetime.utc
-		# @time_slot.end_time = (@time_slot.date.to_s + " " + @time_slot.end_time.strftime("%H:%M:%S")).to_datetime.utc
 		if @time_slot.performer_id
+		
 			@time_slot.status = "booked"
 			if @time_slot.save
 				redirect_to time_slot_path(@time_slot)
