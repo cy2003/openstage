@@ -13,7 +13,7 @@
 <% if @user.owner %>
 <p></p>
   <h3>You own: </h3>
- 
+
 
   <% if @user.owner %>
     <% if @user.owner.venues %>
@@ -37,7 +37,6 @@
 
 
 <% if @user.promoter %>
-<% binding.pry %>
   <% if @user.promoter.venues %>
     <br>
     <h4>These are your venues: </h4><br>
@@ -50,7 +49,6 @@
 
       				<h4>Performer: <%= time_slot.performer.user.first_name %> <%= time_slot.performer.user.last_name %></h4>
           <% elsif time_slot.status == "pending" %>
-            <!-- <% #link_to "Click here to review applications", time_slot_path %> -->
       			<% else %>
       				<h3> No performer scheduled yet.</h3>
       			<% end %>
