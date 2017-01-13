@@ -1,22 +1,28 @@
+<% if flash[:notice] %>
+  <span class="flash_notice_red"><%= flash[:notice] %></span>
+  <% flash[:notice] = nil %>
+<% end %>
+
 <h2>Please Login:</h2>
 
-<h3><%= form_tag('/sessions') do %>
+<h3>
+<%= form_tag('/sessions') do %>
 <%# form_tag({controller: 'sessions', action: 'create', method: 'post'}) %>
-<p></p>
- <%= label_tag :email %>
+
+  <%= label_tag :email %>
   <%= text_field_tag 'user[email]' %>
-<p></p>
-  <br>
+
 
   <%= label_tag :password %>
   <%= password_field_tag 'user[password]' %>
 
-  <p></p>
+  <br>
 
   <%= submit_tag "Sign In"%>
 
-<% end %></h3>
+<% end %>
+</h3>
 
 <p></p>
-<p></p>
+
 <%= link_to "Click here to sign up", new_user_path %>

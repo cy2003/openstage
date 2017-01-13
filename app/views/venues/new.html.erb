@@ -1,7 +1,10 @@
 <h1>Create New Venue</h1>
 
 <p></p>
-<%= flash[:notice] %>
+<% if flash[:notice] %>
+  <span class="flash_notice_red"><%= flash[:notice] %></span>
+  <% flash[:notice] = nil %>
+<% end %>
 <p></p>
 
 <h2>For Venue:</h2>

@@ -1,14 +1,33 @@
-<br>
-<br>
-<br>
-<center><img src="http://i65.tinypic.com/157dqo4.jpg" width="600" height="130" valign = "middle"><br />
 
-<h2><i> 
-<span class="red-text">Where bands and stages meet </span></i></h2>
+<div id="back-ground-img">
+  <br>
+  <center>
+    <br>
+    <img src="http://i65.tinypic.com/157dqo4.jpg" width="600" height="130" valign="middle"><br>
 
+    <br>
 
-<br />
-<br />
- <figure>
-    <img src="http://www.michigantheatre.org/assets/Post-Sing-Competition.jpg" alt="mic on stage"/>
-  </figure></center>
+    <h4><span class="black-text">Book Your Own Life</span></h4>
+
+    <br>
+    <!-- <img src="http://www.michigantheatre.org/assets/Post-Sing-Competition.jpg" alt="mic on stage"/> -->
+    <% if logged_in? %>
+      <%= link_to logout_path do %>
+        <div class="button">
+          <font color="#FFF">Logout</font>
+        </div>
+      <% end %>
+
+    <% else %>
+
+      <%= link_to new_user_path do %>
+        <div class="button">
+          <font color="#FFF"> Create an Account</font>
+        </div>
+      <% end %>
+    <% end %>
+
+    <br>
+    <br>
+  </center>
+</div>
