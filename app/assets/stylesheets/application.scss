@@ -44,7 +44,7 @@
 
 #myHeader{
 	background-color: #d3d3d3;
-	margin: 1em;
+	// margin: 1em;
 }
 
 html, body {
@@ -55,12 +55,14 @@ padding: 0;
 
 }
 
-nav{
+nav {
 	background-color: #d3d3d3;
 }
 
 #main_content{
 	margin: 5px 10%;
+  padding: 10px;
+  // padding-bottom: 6%;
 }
 
 .hline {
@@ -76,8 +78,8 @@ nav{
 
 .flash_notice_red {
   font-family: "Arial";
-  background-color: #c94549;
-  color: white;
-  font-size: 2em;
+  //background-color: #c94549;
+  color: red;
+  font-size: 1em;
   padding: 5px;
 }

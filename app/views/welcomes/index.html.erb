@@ -1,6 +1,6 @@
 
 <div id="back-ground-img">
-  <br>
+  
   <center>
     <br>
     <img src="http://i65.tinypic.com/157dqo4.jpg" width="600" height="130" valign="middle"><br>
@@ -10,7 +10,8 @@
     <h4><span class="black-text">Book Your Own Life</span></h4>
 
     <br>
-    <!-- <img src="http://www.michigantheatre.org/assets/Post-Sing-Competition.jpg" alt="mic on stage"/> -->
+    <img src="http://www.michigantheatre.org/assets/Post-Sing-Competition.jpg" alt="mic on stage"/>
+    <p></p>
     <% if logged_in? %>
       <%= link_to logout_path do %>
         <div class="button">
@@ -20,9 +21,16 @@
 
     <% else %>
 
-      <%= link_to new_user_path do %>
+      <%= link_to login_path do %>
         <div class="button">
-          <font color="#FFF"> Create an Account</font>
+          <font color="#FFF"> Sign In </font>
+        </div>
+        <% end %>
+
+
+      <%= link_to new_user_path do %>
+        <div class="button_blue" style="inline-block">
+          <font color="#FFF"> Create an Account </font>
         </div>
       <% end %>
     <% end %>
