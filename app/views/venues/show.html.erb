@@ -11,18 +11,13 @@
  	<%= @venue.city %>, <%= @venue.state %><br>
 
  	<%= @venue.zip_code %> </a><br>
- 	- Owner: <%= @venue.owner.user.full_name %>
-
-	<br>
-
-	<% if !@venue.promoter %>
-		<div style="color:red;">- Promoter: No promoter associated with this venue</div>
-	<% else %>
-		- Promoter: <%= @venue.promoter.user.full_name %><br></h5>
-	<% end %>
-
-
-
+ 	Owner: <%= @venue.owner.user.full_name %><br>
+	<% if @venue.promoter %>
+ 		Promoter: <%= @venue.promoter.user.full_name %><br></h5>
+  <% else %>
+    <div style="color:red;">- Promoter: No promoter associated with this venue</div>
+	<%end %>
+ 	<p></p>
 	<% if current_user.id == @venue.owner.user.id %>
 	 	<h3><%= link_to "Edit Venue", edit_venue_path(@venue) %></h3>
 
@@ -39,6 +34,18 @@
 		<% end %>
 		<br>
 
+ 	<p></p>
+	<% if @venue.promoter %>
+
+	 	<% if current_user.id == @venue.promoter.user.id %>
+
+
+		<%= link_to "Create New Time Slot", {controller: "time_slots", action: "new", venue_id: @venue.id} %>
+		<% end %>
+	<%end %>
+
+	<br>
+	<br>
 		<h4 style="color:#5398e5;"><u>Shows for <%= @venue.name %></u></h4>
 
 		<% if !@venue.time_slots.blank? %>
@@ -59,6 +66,9 @@
 
 		<% else %>
 				<h5> No performances scheduled </h5>
+
+				<h5>Start Time: <%= time_slot.start_time.strftime("%l:%M %P") %></h5>
+				<h5>End Time: <%= time_slot.end_time.strftime("%l:%M %P")%></h5>
 
 				<% if  current_user.id == @venue.promoter.user.id%>
 					<%= link_to "Edit Time Slot", {controller: "time_slots", action: "edit", venue_id: @venue.id} %><br>
