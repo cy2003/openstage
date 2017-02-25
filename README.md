@@ -6,7 +6,7 @@ In this app, venues post time slots that they are looking to fill with performer
 
 This app is initially targeted at small venues, bars and cafes with the vision to expand into larger venues.
 
-OpenStage was created as a project for the full-stack web developer course at the [Flatiron School](https://flatironschool.com/). The project utilizes [[Rails and Active Record](http://guides.rubyonrails.org/active_record_basics.html) and [PostGres database](https://www.postgresql.org/). 
+OpenStage was created as a project for the full-stack web developer course at the [Flatiron School](https://flatironschool.com/). The project utilizes [Rails and Active Record](http://guides.rubyonrails.org/active_record_basics.html) and [PostGres database](https://www.postgresql.org/). 
 
 
 ## Install
@@ -16,12 +16,14 @@ To launch the app:
 bundle install
 rake db:create
 rake db:migrate
-rake db:seed
 rails s
-
 ```
 The PostGres database needs to be running in your local environment for this app to function. Soon we will move to a 3rd party hosting site (Heroku). 
 
+If you would like to see sample data, seed the data base with:
+```
+rake db:seed
+```
 
 
 ## Team
