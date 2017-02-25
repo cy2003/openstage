@@ -12,8 +12,9 @@
 			
 			<%= time_slot.date.strftime("%A, %B %e, %Y") %>, <%= time_slot.start_time.strftime("%l:%M %P") %> - <%= time_slot.end_time.strftime("%l:%M %P")%> <%= link_to "#{time_slot.venue.name}", "/venues/#{time_slot.venue.id}"%><br>
 	
-			
-			<% end %>
+			<% end <%>
+
+			</%>
 			<% else %>
 			No currently scheduled performances.
 			
